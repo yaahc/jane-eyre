@@ -47,6 +47,8 @@ impl EyreContext for JaneContext {
     fn context_raw(&self, typeid: TypeId) -> Option<&dyn Any> {
         if typeid == TypeId::of::<Backtrace>() {
             self.backtrace.as_ref().map(|b| b as &dyn Any)
+        } else if typeid == TypeId::of::<SpanTrace>() {
+            self.span_trace.as_ref().map(|s| s as &dyn Any)
         } else {
             None
         }
