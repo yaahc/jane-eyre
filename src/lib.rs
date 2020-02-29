@@ -1,30 +1,40 @@
 #![feature(backtrace)]
 
+mod help;
+
 pub use eyre::*;
 
+pub use help::Help;
 pub type ErrReport = eyre::ErrReport<JaneContext>;
 pub type Result<T, E = ErrReport> = core::result::Result<T, E>;
 
+use help::HelpInfo;
+use indenter::Indented;
+use std::any::{Any, TypeId};
+use std::backtrace::Backtrace;
 use std::backtrace::BacktraceStatus;
 use std::error::Error;
-use std::backtrace::Backtrace;
-use std::any::{TypeId, Any};
 use std::fmt::Write as _;
-use indenter::Indented;
-use tracing_error::{SpanTrace, SpanTraceStatus, ExtractSpanTrace};
-
+use tracing_error::{ExtractSpanTrace, SpanTrace, SpanTraceStatus};
 
 pub struct JaneContext {
     backtrace: Option<Backtrace>,
     span_trace: Option<SpanTrace>,
+    help: Vec<HelpInfo>,
 }
 
 fn get_deepest_backtrace<'a>(error: &'a (dyn Error + 'static)) -> Option<&'a Backtrace> {
-    Chain::new(error).rev().flat_map(|error| error.backtrace()).next()
+    Chain::new(error)
+        .rev()
+        .flat_map(|error| error.backtrace())
+        .next()
 }
 
 fn get_deepest_spantrace<'a>(error: &'a (dyn Error + 'static)) -> Option<&'a SpanTrace> {
-    Chain::new(error).rev().flat_map(|error| error.span_trace()).next()
+    Chain::new(error)
+        .rev()
+        .flat_map(|error| error.span_trace())
+        .next()
 }
 
 impl EyreContext for JaneContext {
@@ -41,14 +51,26 @@ impl EyreContext for JaneContext {
             None
         };
 
-        Self { backtrace, span_trace }
+        Self {
+            backtrace,
+            span_trace,
+            help: Vec::new(),
+        }
     }
 
-    fn context_raw(&self, typeid: TypeId) -> Option<&dyn Any> {
+    fn member_ref(&self, typeid: TypeId) -> Option<&dyn Any> {
         if typeid == TypeId::of::<Backtrace>() {
             self.backtrace.as_ref().map(|b| b as &dyn Any)
         } else if typeid == TypeId::of::<SpanTrace>() {
             self.span_trace.as_ref().map(|s| s as &dyn Any)
+        } else {
+            None
+        }
+    }
+
+    fn member_mut(&mut self, typeid: TypeId) -> Option<&mut dyn Any> {
+        if typeid == TypeId::of::<Vec<HelpInfo>>() {
+            Some(&mut self.help)
         } else {
             None
         }
@@ -86,6 +108,10 @@ impl EyreContext for JaneContext {
             write!(Indented::numbered(f, n), "{}", error)?;
         }
 
+        for help in &self.help {
+            write!(f, "\n{}", help)?;
+        }
+
         let span_trace = self
             .span_trace
             .as_ref()
@@ -107,12 +133,5 @@ impl EyreContext for JaneContext {
         }
 
         Ok(())
-    }
-}
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() {
-        assert_eq!(2 + 2, 4);
     }
 }

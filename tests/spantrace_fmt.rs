@@ -1,7 +1,7 @@
-use tracing_error::ErrorLayer;
-use jane_eyre::{ErrReport, eyre};
+use jane_eyre::{eyre, ErrReport};
 use tracing::subscriber::with_default;
 use tracing::{span, Level};
+use tracing_error::ErrorLayer;
 use tracing_subscriber::{prelude::*, registry::Registry};
 
 const EXPECTED: &str = "Error: 
