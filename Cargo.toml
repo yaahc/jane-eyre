@@ -3,6 +3,12 @@ name = "jane-eyre"
 version = "0.1.0"
 authors = ["Jane Lusby <jlusby@yaah.dev>"]
 edition = "2018"
+license = "MIT OR Apache-2.0"
+description = "An Eyre derivative error type with support for tracing-error and help text for error messages"
+repository = "https://github.com/yaahc/jane-eyre"
+documentation = "https://docs.rs/jane-eyre"
+readme = "README.md"
+categories = ["error-reporting"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
