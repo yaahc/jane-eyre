@@ -112,7 +112,9 @@ where
     {
         self.map_err(|e| {
             let mut e = e.into();
-            e.context_mut().help.push(HelpInfo::Note(Box::new(context())));
+            e.context_mut()
+                .help
+                .push(HelpInfo::Note(Box::new(context())));
             e
         })
     }
@@ -123,7 +125,9 @@ where
     {
         self.map_err(|e| {
             let mut e = e.into();
-            e.context_mut().help.push(HelpInfo::Warning(Box::new(context)));
+            e.context_mut()
+                .help
+                .push(HelpInfo::Warning(Box::new(context)));
             e
         })
     }
@@ -135,7 +139,9 @@ where
     {
         self.map_err(|e| {
             let mut e = e.into();
-            e.context_mut().help.push(HelpInfo::Warning(Box::new(context())));
+            e.context_mut()
+                .help
+                .push(HelpInfo::Warning(Box::new(context())));
             e
         })
     }
@@ -146,7 +152,9 @@ where
     {
         self.map_err(|e| {
             let mut e = e.into();
-            e.context_mut().help.push(HelpInfo::Suggestion(Box::new(context)));
+            e.context_mut()
+                .help
+                .push(HelpInfo::Suggestion(Box::new(context)));
             e
         })
     }
@@ -158,7 +166,9 @@ where
     {
         self.map_err(|e| {
             let mut e = e.into();
-            e.context_mut().help.push(HelpInfo::Suggestion(Box::new(context())));
+            e.context_mut()
+                .help
+                .push(HelpInfo::Suggestion(Box::new(context())));
             e
         })
     }
@@ -179,7 +189,6 @@ impl Display for HelpInfo {
         }
     }
 }
-
 
 pub(crate) mod private {
     use crate::ErrReport;

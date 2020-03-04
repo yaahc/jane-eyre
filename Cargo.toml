@@ -7,10 +7,10 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-eyre = { path = "/home/jlusby/git/rust/eyre" }
-tracing-error = { path = "/home/jlusby/git/rust/tracing/tracing-error" }
-indenter = { path = "/home/jlusby/git/rust/indenter" }
+eyre = "^0.3.0"
+tracing-error = "^0.1.2"
+indenter = "^0.1.3"
 
 [dev-dependencies]
-tracing = { path = "/home/jlusby/git/rust/tracing/tracing" }
-tracing-subscriber = { path = "/home/jlusby/git/rust/tracing/tracing-subscriber", default-features = false, features = ["registry", "fmt"] }
+tracing-subscriber = { version = "0.2.2", default-features = false, features = ["registry", "fmt"] }
+tracing = "0.1.13"

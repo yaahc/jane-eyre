@@ -52,8 +52,8 @@ impl EyreContext for JaneContext {
         };
 
         Self {
-            backtrace,
-            span_trace,
+            backtrace: backtrace,
+            span_trace: span_trace,
             help: Vec::new(),
         }
     }
@@ -118,8 +118,10 @@ impl EyreContext for JaneContext {
             .or_else(|| get_deepest_spantrace(error))
             .expect("SpanTrace capture failed");
 
-        if span_trace.status() == SpanTraceStatus::CAPTURED {
-            write!(f, "\n\nSpan Trace:\n{}", span_trace)?;
+        match span_trace.status() {
+            SpanTraceStatus::CAPTURED => write!(f, "\n\nSpan Trace:\n{}", span_trace)?,
+            SpanTraceStatus::UNSUPPORTED => write!(f, "\n\nWarning: SpanTrace capture is Unsupported.\nEnsure that you've setup an error layer and the versions match")?,
+            _ => (),
         }
 
         let backtrace = self
