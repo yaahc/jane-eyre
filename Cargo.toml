@@ -1,6 +1,6 @@
 [package]
 name = "jane-eyre"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Jane Lusby <jlusby@yaah.dev>"]
 edition = "2018"
 license = "MIT OR Apache-2.0"
@@ -8,7 +8,7 @@ description = "An Eyre derivative error type with support for tracing-error and 
 repository = "https://github.com/yaahc/jane-eyre"
 documentation = "https://docs.rs/jane-eyre"
 readme = "README.md"
-categories = ["error-reporting"]
+categories = ["rust-patterns"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
