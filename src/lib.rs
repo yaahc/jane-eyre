@@ -103,7 +103,7 @@ impl EyreContext for JaneContext {
 
         let errors = Chain::new(error)
             .rev()
-            .filter(|e| error.span_trace().is_none())
+            .filter(|e| e.span_trace().is_none())
             .enumerate();
 
         for (n, error) in errors {
