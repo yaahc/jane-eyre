@@ -101,7 +101,10 @@ impl EyreContext for JaneContext {
             return core::fmt::Debug::fmt(error, f);
         }
 
-        let errors = Chain::new(error).rev().enumerate();
+        let errors = Chain::new(error)
+            .rev()
+            .filter(|e| error.span_trace().is_none())
+            .enumerate();
 
         for (n, error) in errors {
             writeln!(f)?;

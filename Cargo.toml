@@ -1,6 +1,6 @@
 [package]
 name = "jane-eyre"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["Jane Lusby <jlusby@yaah.dev>"]
 edition = "2018"
 license = "MIT OR Apache-2.0"
@@ -13,10 +13,10 @@ categories = ["rust-patterns"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-eyre = "^0.3.0"
-tracing-error = "^0.1.2"
-indenter = "^0.1.3"
+eyre = "0.3.5"
+tracing-error = "0.1.2"
+indenter = "0.1.3"
 
 [dev-dependencies]
 tracing-subscriber = { version = "0.2.2", default-features = false, features = ["registry", "fmt"] }
-tracing = "0.1.13"
+tracing = "0.1.12"
