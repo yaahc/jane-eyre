@@ -3,16 +3,10 @@ Jane-Eyre
 
 [![Latest Version](https://img.shields.io/crates/v/jane-eyre.svg)](https://crates.io/crates/jane-eyre)
 [![Rust Documentation](https://img.shields.io/badge/api-rustdoc-blue.svg)](https://docs.rs/jane-eyre)
+[![Jane Approval][jane-badge]][jane-url]
 
-An Eyre derivative error reporting library with support for tracing-error and
-attaching help text to error messages.
-
-```toml
-[dependencies]
-jane-eyre = "0.1"
-```
-
-<br>
+[jane-badge]: https://img.shields.io/badge/jane-approved-green
+[jane-url]: https://yaah.dev/favorite-crates
 
 #### License
 
