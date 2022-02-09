@@ -1,6 +1,6 @@
 [package]
 name = "jane-eyre"
-version = "0.3.0"
+version = "0.4.0"
 authors = ["Jane Lusby <jlusby@yaah.dev>"]
 edition = "2018"
 license = "MIT OR Apache-2.0"
@@ -13,4 +13,4 @@ categories = ["rust-patterns"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-color-eyre = "0.5"
+color-eyre = "0.6"
